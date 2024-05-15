@@ -29,6 +29,33 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
 
 document.querySelector('[data-list-items]').appendChild(starting)
 
+const collectElements = () => { // function will group and store references to specific elements in a single object for easier access and manipulation instead of calling document.querySelector() everytime
+    return {
+        searchGenres: document.querySelector('[data-search-genres]'),
+        searchAuthors: document.querySelector('[data-search-authors]'),
+        settingsTheme: document.querySelector('[data-settings-theme]'), 
+        listButton: document.querySelector('[data-list-button]'),
+        searchCancel: document.querySelector('[data-search-cancel]'),
+        searchOverlay: document.querySelector('[data-search-overlay]'),
+        settingsCancel: document.querySelector('[data-settings-cancel]'),
+        settingsOverlay: document.querySelector('[data-settings-overlay]'),
+        headerSearch: document.querySelector('[data-header-search]'),
+        searchTitle: document.querySelector('[data-search-title]'),
+        headerSettings: document.querySelector('[data-header-settings]'),
+        listClose: document.querySelector('[data-list-close]'),
+        listActive: document.querySelector('[data-list-active]'),
+        settingsForm: document.querySelector('[data-settings-form]'),
+        searchForm: document.querySelector('[data-search-form]'),
+        listMessage: document.querySelector('[data-list-message]'),
+        listItems: document.querySelector('[data-list-items]'),
+        listBlur: document.querySelector('[data-list-blur]'),
+        listImage: document.querySelector('[data-list-image]'),
+        listTitle: document.querySelector('[data-list-title]'), 
+        listSubtitle: document.querySelector('[data-list-subtitle]'),
+        listDescription: document.querySelector('[data-list-description]')
+    };
+};
+
 const genreHtml = document.createDocumentFragment()
 const firstGenreElement = document.createElement('option')
 firstGenreElement.value = 'any'
