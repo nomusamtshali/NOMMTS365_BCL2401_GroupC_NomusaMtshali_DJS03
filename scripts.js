@@ -56,6 +56,8 @@ const collectElements = () => { // function will group and store references to s
     };
 };
 
+const html = collectElements() //html variable stores the object that contains references to the various DOM elements; I'll be able to access these elements through the properties of the html object
+
 const genreHtml = document.createDocumentFragment()
 const firstGenreElement = document.createElement('option')
 firstGenreElement.value = 'any'
