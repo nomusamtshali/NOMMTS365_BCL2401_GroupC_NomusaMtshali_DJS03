@@ -27,6 +27,8 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
 }
 };
 
+initializeDocument();
+
 document.querySelector('[data-list-items]').appendChild(starting)
 
 const collectElements = () => { // function will group and store references to specific elements in a single object for easier access and manipulation instead of calling document.querySelector() everytime
