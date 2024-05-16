@@ -250,7 +250,7 @@ const loadMoreBooks = () => {
     
 html.listButton.addEventListener('click', loadMoreBooks);
 
-/// function updates the displayed book details when a book item in the "listItems" element is clicked.
+// function updates the displayed book details when a book item in the "listItems" element is clicked.
 const bookDetails = () => {
   const pathArray = Array.from(event.path || event.composedPath())
     let active = null //  initializes the variable "active" to store the book data.
