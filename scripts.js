@@ -57,8 +57,6 @@ const initializeDocument = () => {
 html.listItems.appendChild(starting)
 };
 
-initializeDocument();
-
 const genreOptions = () => {
     const genreHtml = document.createDocumentFragment()
     const firstGenreElement = document.createElement('option') // an option element for "All Genres".
@@ -75,9 +73,6 @@ for (const [id, name] of Object.entries(genres)) {
 
 html.searchGenres.appendChild(genreHtml)
 };
-
-genreOptions();
-
 
 const authorOptions = () => {
   const authorsHtml = document.createDocumentFragment()
@@ -96,8 +91,6 @@ for (const [id, name] of Object.entries(authors)) {
 html.searchAuthors.appendChild(authorsHtml)  
 }
 
-authorOptions();
-
 const setThemeBasedOnPreference = () => {
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     html.settingsTheme.value = 'night'
@@ -110,8 +103,6 @@ const setThemeBasedOnPreference = () => {
  }  
 }
 
-setThemeBasedOnPreference();
-
 const showMoreButton = () => {
 html.listButton.innerText = `Show more (${books.length - BOOKS_PER_PAGE})`
 html.listButton.disabled = (matches.length - (page * BOOKS_PER_PAGE)) > 0
@@ -121,10 +112,6 @@ html.listButton.innerHTML = `
     <span class="list__remaining"> (${(matches.length - (page * BOOKS_PER_PAGE)) > 0 ? (matches.length - (page * BOOKS_PER_PAGE)) : 0})</span>
 `    
 }
-
-showMoreButton();
-
-
 
 const updateTheme = (event) => { // function takes an 'event' object as a parameter which represents an event triggered by submitting a from
     event.preventDefault()
@@ -141,7 +128,6 @@ const updateTheme = (event) => { // function takes an 'event' object as a parame
     
     html.settingsOverlay.open = false    
 };
-
 
 // function filters a list of books based on the provided search criteria, and updates the UI to display the filtered results.
 const filteredResults = (event) => {
@@ -214,8 +200,6 @@ const filteredResults = (event) => {
 
 };
     
-
-
 // function will load and display additional book items when the "Show more" button is clicked.
 const loadMoreBooks = () => {
    const fragment = document.createDocumentFragment() // document fragment is created to hold the new book items to be displayed.
@@ -244,10 +228,8 @@ const loadMoreBooks = () => {
     page += 1 // increments the page variable, which will show the next batch of book items to be loaded when the "Show more" button is clicked again.
 };
     
-
-
 // function updates the displayed book details when a book item in the "listItems" element is clicked.
-const bookDetails = () => {
+const bookDetails = (event) => {
   const pathArray = Array.from(event.path || event.composedPath())
     let active = null //  initializes the variable "active" to store the book data.
 
@@ -298,4 +280,13 @@ const eventListeners = () => {
         }) // when the user clicks on the list close element, this listener hides the active list
 };
 
-eventListeners();
+const runApplication = () => {
+  initializeDocument();
+  genreOptions();
+  authorOptions();
+  setThemeBasedOnPreference();
+  showMoreButton();
+  eventListeners();
+}
+
+runApplication();
