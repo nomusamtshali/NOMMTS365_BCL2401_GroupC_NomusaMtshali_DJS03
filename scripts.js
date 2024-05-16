@@ -3,35 +3,6 @@ import { books, authors, genres, BOOKS_PER_PAGE } from './data.js'
 let page = 1;
 let matches = books
 
-const initializeDocument = () => {
-const starting = document.createDocumentFragment() // a document fragment called "starting"
-
-for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
-    const element = document.createElement('button') // button is created
-    element.classList = 'preview' // add CSS class to button
-    element.setAttribute('data-preview', id)
-
-    element.innerHTML = `
-        <img
-            class="preview__image"
-            src="${image}"
-        />
-        
-        <div class="preview__info">
-            <h3 class="preview__title">${title}</h3>
-            <div class="preview__author">${authors[author]}</div>
-        </div>
-    `
-
-    starting.appendChild(element) // append the created button element to the "starting" document fragment 
-};
-html.listItems.appendChild(starting)
-};
-
-initializeDocument();
-
-
-
 const collectElements = () => { // function will group and store references to specific elements in a single object for easier access and manipulation instead of calling document.querySelector() everytime
     return {
         searchGenres: document.querySelector('[data-search-genres]'),
@@ -60,6 +31,34 @@ const collectElements = () => { // function will group and store references to s
 };
 
 const html = collectElements(); //html variable stores the object that contains references to the various DOM elements; I'll be able to access these elements through the properties of the html object
+
+const initializeDocument = () => {
+   const starting = document.createDocumentFragment() // a document fragment called "starting"
+
+    for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
+      const element = document.createElement('button') // button is created
+      element.classList = 'preview' // add CSS class to button
+      element.setAttribute('data-preview', id)
+
+      element.innerHTML = `
+        <img
+            class="preview__image"
+            src="${image}"
+        />
+        
+        <div class="preview__info">
+            <h3 class="preview__title">${title}</h3>
+            <div class="preview__author">${authors[author]}</div>
+        </div>
+     `
+
+    starting.appendChild(element) // append the created button element to the "starting" document fragment 
+};
+html.listItems.appendChild(starting)
+};
+
+initializeDocument();
+
 
 const genreHtml = document.createDocumentFragment()
 const firstGenreElement = document.createElement('option')
