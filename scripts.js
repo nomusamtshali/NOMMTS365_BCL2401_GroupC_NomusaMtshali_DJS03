@@ -110,24 +110,24 @@ html.listButton.innerHTML = `
 
 html.searchCancel.addEventListener('click', () => {
     html.searchOverlay.open = false
-})
+}) // event listener hides the search overlay when the user clicks on the search cancel button.
 
 html.settingsCancel.addEventListener('click', () => {
-    document.querySelector('[data-settings-overlay]').open = false
-})
+    html.settingsOverlay.open = false
+}) // event listener hides the settings overlay when the user clicks on the settings cancel button.
 
 html.headerSearch.addEventListener('click', () => {
     html.searchOverlay.open = true 
     html.searchTitle.focus()
-})
+}) // when the user clicks on the header search element, the search overlay is displayed, and the focus is set to the search title input field.
 
 html.headerSettings.addEventListener('click', () => {
    html.settingsOverlay.open = true 
-})
+}) // event listener opens the settings overlay when the user clicks on the header settings element.
 
 html.listClose.addEventListener('click', () => {
     html.listActive.open = false
-})
+}) // when the user clicks on the list close element, this listener hides the active list
 
 const updateTheme = (event) => { // function takes an 'event' object as a parameter which represents an event triggered by submitting a from
     event.preventDefault()
