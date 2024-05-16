@@ -250,20 +250,21 @@ const loadMoreBooks = () => {
     
 html.listButton.addEventListener('click', loadMoreBooks);
 
-html.listItems.addEventListener('click', (event) => {
-    const pathArray = Array.from(event.path || event.composedPath())
-    let active = null
+/// function updates the displayed book details when a book item in the "listItems" element is clicked.
+const bookDetails = () => {
+  const pathArray = Array.from(event.path || event.composedPath())
+    let active = null //  initializes the variable "active" to store the book data.
 
-    for (const node of pathArray) {
+    for (const node of pathArray) { // loop iterates over the elements in the "pathArray".
         if (active) break
 
-        if (node?.dataset?.preview) {
+        if (node?.dataset?.preview) { 
             let result = null
     
             for (const singleBook of books) {
                 if (result) break;
                 if (singleBook.id === node?.dataset?.preview) result = singleBook
-            } 
+            } // // if an element with the data-preview attribute is found, it iterates through the books to find the matching book based on the data-preview value.
         
             active = result
         }
@@ -271,10 +272,12 @@ html.listItems.addEventListener('click', (event) => {
     
     if (active) {
         html.listActive.open = true
-        html.listBlur.src = active.image
-        html.listImage.src = active.image
-        html.listTitle.innerText = active.title
-        html.listSubtitle.innerText = `${authors[active.author]} (${new Date(active.published).getFullYear()})`
-        html.listDescription.innerText = active.description
+        html.listBlur.src = active.image // src attribute is updated with the image from the active book data.
+        html.listImage.src = active.image // src attribute is updated with the image from the active book data.
+        html.listTitle.innerText = active.title // content is updated with the title from the active book data.
+        html.listSubtitle.innerText = `${authors[active.author]} (${new Date(active.published).getFullYear()})` // content is updated with the author's name (retrieved from the authors object) and the book's publication year.
+        html.listDescription.innerText = active.description // content is updated with the description from the active book data.
     }
-})
+};
+    
+html.listItems.addEventListener('click', bookDetails);
