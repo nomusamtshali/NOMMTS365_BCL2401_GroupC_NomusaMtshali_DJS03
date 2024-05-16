@@ -220,11 +220,11 @@ const filteredResults = (event) => {
     
 html.searchForm.addEventListener('submit', filteredResults);
 
-html.listButton.addEventListener('click', () => {
-    const fragment = document.createDocumentFragment()
+const loadMoreBooks = () => {
+   const fragment = document.createDocumentFragment() // document fragment is created to hold the new book items to be displayed.
 
     for (const { author, id, image, title } of matches.slice(page * BOOKS_PER_PAGE, (page + 1) * BOOKS_PER_PAGE)) {
-        const element = document.createElement('button')
+        const element = document.createElement('button') // For each book, a button element is created.
         element.classList = 'preview'
         element.setAttribute('data-preview', id)
     
@@ -238,14 +238,16 @@ html.listButton.addEventListener('click', () => {
                 <h3 class="preview__title">${title}</h3>
                 <div class="preview__author">${authors[author]}</div>
             </div>
-        `
+        ` // button contains the book's image, title, and author, and has a unique data-preview attribute.
 
         fragment.appendChild(element)
     }
 
-    html.listItems.appendChild(fragment)
-    page += 1
-})
+    html.listItems.appendChild(fragment) // after all the book items are added to the document fragment, it is appended to the html.listItems element, adding the new book items to the UI.
+    page += 1 // increments the page variable, which will show the next batch of book items to be loaded when the "Show more" button is clicked again.
+};
+    
+html.listButton.addEventListener('click', loadMoreBooks);
 
 html.listItems.addEventListener('click', (event) => {
     const pathArray = Array.from(event.path || event.composedPath())
