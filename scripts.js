@@ -147,42 +147,45 @@ const updateTheme = (event) => { // function takes an 'event' object as a parame
 
 html.settingsForm.addEventListener('submit', updateTheme) // added the updateTheme function as an event listener for the form submission event of the settings form (html.settingsForm), ensuring that the theme will be updated whenever the form is submitted.
 
-html.searchForm.addEventListener('submit', (event) => {
+// function filters a list of books based on the provided search criteria, and updates the UI to display the filtered results.
+const filteredResults = (event) => {
     event.preventDefault()
     const formData = new FormData(event.target)
     const filters = Object.fromEntries(formData)
-    const result = []
+    const result = [] // initializes an empty array to store the filtered books.
 
-    for (const book of books) {
+    for (const book of books) { // loop iterates over each book in the books array.
         let genreMatch = filters.genre === 'any'
 
         for (const singleGenre of book.genres) {
             if (genreMatch) break;
-            if (singleGenre === filters.genre) { genreMatch = true }
+            if (singleGenre === filters.genre) { genreMatch = true } // variable is set to true if the selected genre is 'any' or if the book's genre matches the selected genre.
         }
 
         if (
             (filters.title.trim() === '' || book.title.toLowerCase().includes(filters.title.toLowerCase())) && 
             (filters.author === 'any' || book.author === filters.author) && 
             genreMatch
-        ) {
-            result.push(book)
+        ) //statement checks if the provided filters (title, author, and genre) match the current book and pushes the book into the result array if they do.
+         {
+            result.push(book) 
         }
     }
 
     page = 1;
-    matches = result
+    matches = result // variables are updated for pagination.
 
     if (result.length < 1) {
         html.listMessage.classList.add('list__message_show')
     } else {
-        html.listMessage.classList.remove('list__message_show')
-    }
+        html.listMessage.classList.remove('list__message_show') 
+    } // if no results are found, a message "No results found. Your filters might be too narrow." will be displayed by adding the list__message_show class to the listMessage element otherwise it won't show.
 
     html.listItems.innerHTML = ''
-    const newItems = document.createDocumentFragment()
+    const newItems = document.createDocumentFragment() // document fragment is created to store the filtered book items.
 
-    for (const { author, id, image, title } of result.slice(0, BOOKS_PER_PAGE)) {
+
+    for (const { author, id, image, title } of result.slice(0, BOOKS_PER_PAGE)) { // loop iterates over the filtered books, creating a button element for each one. button contains the book's image, title, and author, and has a unique data-preview attribute.
         const element = document.createElement('button')
         element.classList = 'preview'
         element.setAttribute('data-preview', id)
@@ -200,19 +203,22 @@ html.searchForm.addEventListener('submit', (event) => {
         `
 
         newItems.appendChild(element)
-    }
+    } 
 
-    html.listItems.appendChild(newItems)
-    html.listButton.disabled = (matches.length - (page * BOOKS_PER_PAGE)) < 1
+    html.listItems.appendChild(newItems) // document fragment is appended to the "listItems" element.
+    html.listButton.disabled = (matches.length - (page * BOOKS_PER_PAGE)) < 1 // "Show more" button is disabled if there are no more results to display.
 
     html.listButton.innerHTML = `
         <span>Show more</span>
-        <span class="list__remaining"> (${(matches.length - (page * BOOKS_PER_PAGE)) > 0 ? (matches.length - (page * BOOKS_PER_PAGE)) : 0})</span>
-    `
+        <span class="list__remaining"> (${(matches.length - (page * BOOKS_PER_PAGE)) > 0 ? (matches.length - (page * BOOKS_PER_PAGE)) : 0})</span> 
+    ` //  button's text is updated to show the number of remaining results.
 
-    window.scrollTo({top: 0, behavior: 'smooth'});
-    document.querySelector('[data-search-overlay]').open = false
-})
+    window.scrollTo({top: 0, behavior: 'smooth'}); // page scrolls to the top
+    html.searchOverlay.open = false // search overlay is presumably closed by setting the "open" property of an element "html.searchOverlay" to false.
+
+};
+    
+html.searchForm.addEventListener('submit', filteredResults);
 
 html.listButton.addEventListener('click', () => {
     const fragment = document.createDocumentFragment()
