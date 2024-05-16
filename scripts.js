@@ -24,12 +24,13 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
     `
 
     starting.appendChild(element) // append the created button element to the "starting" document fragment 
-}
+};
+html.listItems.appendChild(starting)
 };
 
 initializeDocument();
 
-html.listItems.appendChild(starting)
+
 
 const collectElements = () => { // function will group and store references to specific elements in a single object for easier access and manipulation instead of calling document.querySelector() everytime
     return {
