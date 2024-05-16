@@ -79,7 +79,8 @@ html.searchGenres.appendChild(genreHtml)
 genreOptions();
 
 
-const authorsHtml = document.createDocumentFragment()
+const authorOptions = () => {
+  const authorsHtml = document.createDocumentFragment()
 const firstAuthorElement = document.createElement('option')
 firstAuthorElement.value = 'any'
 firstAuthorElement.innerText = 'All Authors'
@@ -92,8 +93,12 @@ for (const [id, name] of Object.entries(authors)) {
     authorsHtml.appendChild(element)
 }
 
-html.searchAuthors.appendChild(authorsHtml)
+html.searchAuthors.appendChild(authorsHtml)  
+}
 
+authorOptions();
+
+// Code to update UI theme based on system preference
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     html.settingsTheme.value = 'night'
     document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
