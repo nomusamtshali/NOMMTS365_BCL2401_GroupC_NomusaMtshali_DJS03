@@ -109,13 +109,17 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
     document.documentElement.style.setProperty('--color-light', '255, 255, 255');
 }
 
+const showMoreButton = () => {
 html.listButton.innerText = `Show more (${books.length - BOOKS_PER_PAGE})`
 html.listButton.disabled = (matches.length - (page * BOOKS_PER_PAGE)) > 0
 
 html.listButton.innerHTML = `
     <span>Show more</span>
     <span class="list__remaining"> (${(matches.length - (page * BOOKS_PER_PAGE)) > 0 ? (matches.length - (page * BOOKS_PER_PAGE)) : 0})</span>
-`
+`    
+}
+
+showMoreButton();
 
 
 
