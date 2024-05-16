@@ -98,8 +98,8 @@ html.searchAuthors.appendChild(authorsHtml)
 
 authorOptions();
 
-// Code to update UI theme based on system preference
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+const setThemeBasedOnPreference = () => {
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     html.settingsTheme.value = 'night'
     document.documentElement.style.setProperty('--color-dark', '255, 255, 255');
     document.documentElement.style.setProperty('--color-light', '10, 10, 20');
@@ -107,7 +107,10 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
     html.settingsTheme.value = 'day'
     document.documentElement.style.setProperty('--color-dark', '10, 10, 20');
     document.documentElement.style.setProperty('--color-light', '255, 255, 255');
+ }  
 }
+
+setThemeBasedOnPreference();
 
 const showMoreButton = () => {
 html.listButton.innerText = `Show more (${books.length - BOOKS_PER_PAGE})`
