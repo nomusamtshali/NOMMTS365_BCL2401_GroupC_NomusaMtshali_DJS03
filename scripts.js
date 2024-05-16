@@ -220,6 +220,7 @@ const filteredResults = (event) => {
     
 html.searchForm.addEventListener('submit', filteredResults);
 
+// function will load and display additional book items when the "Show more" button is clicked.
 const loadMoreBooks = () => {
    const fragment = document.createDocumentFragment() // document fragment is created to hold the new book items to be displayed.
 
