@@ -129,7 +129,7 @@ html.listClose.addEventListener('click', () => {
     html.listActive.open = false
 })
 
-html.settingsForm.addEventListener('submit', (event) => {
+const updateTheme = (event) => { // function takes an 'event' object as a parameter which represents an event triggered by submitting a from
     event.preventDefault()
     const formData = new FormData(event.target)
     const { theme } = Object.fromEntries(formData)
@@ -142,8 +142,10 @@ html.settingsForm.addEventListener('submit', (event) => {
         document.documentElement.style.setProperty('--color-light', '255, 255, 255');
     }
     
-    html.settingsOverlay.open = false
-})
+    html.settingsOverlay.open = false    
+};
+
+html.settingsForm.addEventListener('submit', updateTheme) // added the updateTheme function as an event listener for the form submission event of the settings form (html.settingsForm), ensuring that the theme will be updated whenever the form is submitted.
 
 html.searchForm.addEventListener('submit', (event) => {
     event.preventDefault()
