@@ -108,26 +108,7 @@ html.listButton.innerHTML = `
     <span class="list__remaining"> (${(matches.length - (page * BOOKS_PER_PAGE)) > 0 ? (matches.length - (page * BOOKS_PER_PAGE)) : 0})</span>
 `
 
-html.searchCancel.addEventListener('click', () => {
-    html.searchOverlay.open = false
-}) // event listener hides the search overlay when the user clicks on the search cancel button.
 
-html.settingsCancel.addEventListener('click', () => {
-    html.settingsOverlay.open = false
-}) // event listener hides the settings overlay when the user clicks on the settings cancel button.
-
-html.headerSearch.addEventListener('click', () => {
-    html.searchOverlay.open = true 
-    html.searchTitle.focus()
-}) // when the user clicks on the header search element, the search overlay is displayed, and the focus is set to the search title input field.
-
-html.headerSettings.addEventListener('click', () => {
-   html.settingsOverlay.open = true 
-}) // event listener opens the settings overlay when the user clicks on the header settings element.
-
-html.listClose.addEventListener('click', () => {
-    html.listActive.open = false
-}) // when the user clicks on the list close element, this listener hides the active list
 
 const updateTheme = (event) => { // function takes an 'event' object as a parameter which represents an event triggered by submitting a from
     event.preventDefault()
@@ -145,7 +126,6 @@ const updateTheme = (event) => { // function takes an 'event' object as a parame
     html.settingsOverlay.open = false    
 };
 
-html.settingsForm.addEventListener('submit', updateTheme) // added the updateTheme function as an event listener for the form submission event of the settings form (html.settingsForm), ensuring that the theme will be updated whenever the form is submitted.
 
 // function filters a list of books based on the provided search criteria, and updates the UI to display the filtered results.
 const filteredResults = (event) => {
@@ -218,7 +198,7 @@ const filteredResults = (event) => {
 
 };
     
-html.searchForm.addEventListener('submit', filteredResults);
+
 
 // function will load and display additional book items when the "Show more" button is clicked.
 const loadMoreBooks = () => {
@@ -248,7 +228,7 @@ const loadMoreBooks = () => {
     page += 1 // increments the page variable, which will show the next batch of book items to be loaded when the "Show more" button is clicked again.
 };
     
-html.listButton.addEventListener('click', loadMoreBooks);
+
 
 // function updates the displayed book details when a book item in the "listItems" element is clicked.
 const bookDetails = () => {
@@ -280,4 +260,26 @@ const bookDetails = () => {
     }
 };
     
-html.listItems.addEventListener('click', bookDetails);
+const eventListeners = () => {
+    html.settingsForm.addEventListener('submit', updateTheme), // added the updateTheme function as an event listener for the form submission event of the settings form (html.settingsForm), ensuring that the theme will be updated whenever the form is submitted.
+    html.searchForm.addEventListener('submit', filteredResults),
+    html.listButton.addEventListener('click', loadMoreBooks),
+    html.listItems.addEventListener('click', bookDetails),
+    html.searchCancel.addEventListener('click', () => {
+    html.searchOverlay.open = false}), // event listener hides the search overlay when the user clicks on the search cancel button.
+    html.settingsCancel.addEventListener('click', () => {
+      html.settingsOverlay.open = false
+        }), // event listener hides the settings overlay when the user clicks on the settings cancel button.
+    html.headerSearch.addEventListener('click', () => {
+      html.searchOverlay.open = true 
+      html.searchTitle.focus()
+        }), // when the user clicks on the header search element, the search overlay is displayed, and the focus is set to the search title input field.
+    html.headerSettings.addEventListener('click', () => {
+      html.settingsOverlay.open = true 
+        }), // event listener opens the settings overlay when the user clicks on the header settings element.
+    html.listClose.addEventListener('click', () => {
+      html.listActive.open = false
+        }) // when the user clicks on the list close element, this listener hides the active list
+};
+
+eventListeners();
