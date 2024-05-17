@@ -32,7 +32,7 @@ const collectElements = () => { // function will group and store references to s
 
 const html = collectElements(); //html variable stores the object that contains references to the various DOM elements; I'll be able to access these elements through the properties of the html object
 
-const createBookPreview = ({}) => {
+const createBookPreview = ({author, id, image, title}) => {
     const element = document.createElement('button') // button is created
       element.classList = 'preview' // add CSS class to button
       element.setAttribute('data-preview', id)
