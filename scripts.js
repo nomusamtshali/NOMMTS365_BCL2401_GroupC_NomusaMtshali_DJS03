@@ -32,11 +32,8 @@ const collectElements = () => { // function will group and store references to s
 
 const html = collectElements(); //html variable stores the object that contains references to the various DOM elements; I'll be able to access these elements through the properties of the html object
 
-const initializeDocument = () => {
-   const starting = document.createDocumentFragment() // a document fragment called "starting"
-
-    for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
-      const element = document.createElement('button') // button is created
+const createBookPreview = ({}) => {
+    const element = document.createElement('button') // button is created
       element.classList = 'preview' // add CSS class to button
       element.setAttribute('data-preview', id)
 
@@ -51,10 +48,18 @@ const initializeDocument = () => {
             <div class="preview__author">${authors[author]}</div>
         </div>
      `
+    return element;
+}
 
-    starting.appendChild(element) // append the created button element to the "starting" document fragment 
+const starting = document.createDocumentFragment() // a document fragment called "starting"
+
+const initializeDocument = (object, container) => {
+    for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
+      const bookPreview = createBookPreview({author, id, image, title})
+
+    container.appendChild(bookPreview) // append the created button element to the "starting" document fragment 
 };
-html.listItems.appendChild(starting)
+html.listItems.appendChild(container)
 };
 
 const genreOptions = () => {
@@ -281,7 +286,7 @@ const eventListeners = () => {
 };
 
 const runApplication = () => {
-  initializeDocument();
+  initializeDocument(books, starting);
   genreOptions();
   authorOptions();
   setThemeBasedOnPreference();
