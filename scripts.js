@@ -54,10 +54,10 @@ const createBookPreview = ({author, id, image, title}) => {
 const starting = document.createDocumentFragment() // a document fragment called "starting"
 
 const initializeDocument = (object, container) => {
-    for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
+    for (const { author, id, image, title } of object.slice(0, BOOKS_PER_PAGE)) {
       const bookPreview = createBookPreview({author, id, image, title})
 
-    container.appendChild(bookPreview) // append the created button element to the "starting" document fragment 
+    container.appendChild(bookPreview) 
 };
 html.listItems.appendChild(container)
 };
