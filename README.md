@@ -19,12 +19,12 @@
 
 # Reflections
 ## Areas of Mastery
-- 
+- There are no areas of mastery in this project.
 
 ## Challenges faced
 - Time-management = I spent a lot of time on this project and I wasn't sure whether I was going to meet the deadline or not.
-- Understanding
-- Abstraction = 
+- Putting my code blocks in order to maintain functionality.
+- Abstracting my code by making new function names.
 
 ## Areas of Improvement
 - Time-management = I need to set my schedule straight and adhere to it. Hopefully it'll put me back in line.
